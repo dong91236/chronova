@@ -1,3 +1,6 @@
+import './styles/base.css';
+import './styles/layout.css';
+import './styles/components.css';
 import { renderHeader, initHeader } from './components/header.js';
 import { renderHero, initHero } from './components/hero.js';
 import { renderFeatured, initFeatured } from './components/featured.js';
