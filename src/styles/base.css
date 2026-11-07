@@ -1,0 +1,81 @@
+:root {
+  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --header-h: 72px;
+  --radius: 14px;
+  --container: 1200px;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+  --section-y: clamp(5rem, 11vw, 9rem);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #101012;
+  --surface: #18181b;
+  --surface-2: #202024;
+  --text: #ecebe8;
+  --muted: #9b9da3;
+  --line: rgba(255, 255, 255, 0.1);
+  --accent: #c9b88f;
+  --accent-ink: #14120d;
+  --glow: rgba(201, 184, 143, 0.12);
+  --header-bg: rgba(16, 16, 18, 0.78);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f3f3f1;
+  --surface: #ffffff;
+  --surface-2: #e9e9e6;
+  --text: #17171a;
+  --muted: #666870;
+  --line: rgba(0, 0, 0, 0.1);
+  --accent: #8a7646;
+  --accent-ink: #ffffff;
+  --glow: rgba(138, 118, 70, 0.12);
+  --header-bg: rgba(243, 243, 241, 0.82);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+body.menu-open, body.modal-open { overflow: hidden; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+h1, h2, h3, p, ul, dl, dd { margin: 0; padding: 0; }
+ul { list-style: none; }
+section[id] { scroll-margin-top: calc(var(--header-h) - 1px); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.skip {
+  position: fixed; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--accent); color: var(--accent-ink); padding: 0.6rem 1rem; border-radius: 8px;
+  transition: top 0.2s;
+}
+.skip:focus { top: 1rem; }
+
+/* Scroll reveal — only hidden when JS is running */
+.js [data-reveal] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+}
